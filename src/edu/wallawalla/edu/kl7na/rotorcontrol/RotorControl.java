@@ -137,6 +137,8 @@ public class RotorControl extends Activity {
             boolean result = false;
             try {
                 Log.i("AsyncTask", "doInBackground: Creating socket");
+                // This ip address needs to be changed for your setup.
+                // Eventually we need to add some preferences.
                 SocketAddress sockaddr = new InetSocketAddress("192.168.2.237", 4533);
                 nsocket = new Socket();
                 nsocket.connect(sockaddr, 10000); //10 second connection timeout (second parameter)
