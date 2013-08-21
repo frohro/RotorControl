@@ -26,13 +26,12 @@
 </Button>
 
 	<TextView
-	    android:id="@+id/textView1"
+	    android:id="@+id/inputHeadingTextView"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_alignBaseline="@+id/connectButton"
 	    android:layout_alignBottom="@+id/connectButton"
 	    android:layout_alignLeft="@+id/editBearingText"
-	    android:layout_marginLeft="18dp"
 	    android:text="@string/heading" />
 
 	<EditText

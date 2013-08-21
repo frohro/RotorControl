@@ -31,7 +31,7 @@ import android.widget.TextView.OnEditorActionListener;
 
 public class RotorControl extends Activity {
     Button connectButton, sendButton, rotateAntennaButton;
-    TextView textStatus;
+    TextView textStatus, inputHeadingTextView;
     NetworkTask networktask;
     protected String rotateString;
     EditText editBearingText;
@@ -44,10 +44,15 @@ public class RotorControl extends Activity {
         setContentView(R.layout.activity_main);
         connectButton = (Button)findViewById(R.id.connectButton);
         sendButton = (Button)findViewById(R.id.getHeadingButton);
+        sendButton.setVisibility(View.INVISIBLE);
         rotateProgressBar = (ProgressBar)findViewById(R.id.rotateProgressBar);
         rotateProgressBar.setVisibility(View.INVISIBLE);
         textStatus = (TextView)findViewById(R.id.textStatus);
+        textStatus.setVisibility(View.INVISIBLE);
+        inputHeadingTextView = (TextView)findViewById(R.id.inputHeadingTextView);
+        inputHeadingTextView.setVisibility(View.INVISIBLE);
         editBearingText = (EditText)findViewById(R.id.editBearingText);
+        editBearingText.setVisibility(View.INVISIBLE);
         
         connectButton.setOnClickListener(connectButtonListener);
         sendButton.setOnClickListener(sendButtonListener);
@@ -75,6 +80,10 @@ public class RotorControl extends Activity {
         @SuppressLint("NewApi")
 		public void onClick(View v){
             connectButton.setVisibility(View.INVISIBLE);
+            sendButton.setVisibility(View.VISIBLE);
+            editBearingText.setVisibility(View.VISIBLE);
+            textStatus.setVisibility(View.VISIBLE);
+            inputHeadingTextView.setVisibility(View.VISIBLE);
             networktask = new NetworkTask(); //New instance of NetworkTask
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
                 networktask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
