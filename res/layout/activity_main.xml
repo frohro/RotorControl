@@ -1,65 +1,74 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/aeqd"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:fitsSystemWindows="false"
     tools:context=".RotorControl" >
-    
-	<Button
-	    android:id="@+id/connectButton"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentLeft="true"
-	    android:layout_alignParentTop="true"
-	    android:text="@string/connect_string" >
 
-</Button>
-	
-	<Button
-	    android:id="@+id/getHeadingButton"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentLeft="true"
-	    android:layout_below="@+id/connectButton"
-	    android:text="@string/get_heading" >
-</Button>
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="map View"
+        android:scaleType="fitEnd"
+        android:src="@drawable/aeqd" />
 
-	<TextView
-	    android:id="@+id/inputHeadingTextView"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignBaseline="@+id/connectButton"
-	    android:layout_alignBottom="@+id/connectButton"
-	    android:layout_alignLeft="@+id/editBearingText"
-	    android:text="@string/heading" />
+    <Button
+        android:id="@+id/connectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/connect_string" >
+    </Button>
 
-	<EditText
-	    android:id="@+id/editBearingText"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_above="@+id/textStatus"
-	    android:layout_marginLeft="30dp"
-	    android:layout_toRightOf="@+id/connectButton"
-	    android:ems="4"
-	    android:inputType="text|number" />
+    <Button
+        android:id="@+id/getHeadingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/connectButton"
+        android:text="@string/get_heading" >
+    </Button>
 
-	<TextView
-	    android:id="@+id/textStatus"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentLeft="true"
-	    android:layout_alignRight="@+id/connectButton"
-	    android:layout_below="@+id/getHeadingButton"
-	    android:text="@string/heading"
-	    android:textSize="24sp" />
+    <TextView
+        android:id="@+id/inputHeadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/connectButton"
+        android:layout_alignBottom="@+id/connectButton"
+        android:layout_alignLeft="@+id/editBearingText"
+        android:text="@string/heading" />
 
-	<ProgressBar
-	    android:id="@+id/rotateProgressBar"
-	    style="?android:attr/progressBarStyleLarge"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_centerHorizontal="true"
-	    android:layout_centerVertical="true" />
+    <EditText
+        android:id="@+id/editBearingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textStatus"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@+id/connectButton"
+        android:ems="4"
+        android:inputType="text|number" />
+
+    <TextView
+        android:id="@+id/textStatus"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/connectButton"
+        android:layout_below="@+id/getHeadingButton"
+        android:text="@string/heading"
+        android:textSize="24sp" />
+
+    <ProgressBar
+        android:id="@+id/rotateProgressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView1"
+        android:layout_alignRight="@+id/textStatus"
+        android:layout_marginBottom="101dp" />
 
 </RelativeLayout>
