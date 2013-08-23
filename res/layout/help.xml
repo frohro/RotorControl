@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/helpHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/help_heading_contents"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ScrollView
+            android:id="@+id/helpScrollView"
+            android:layout_width="297dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:visibility="visible" >
+
+            <TextView
+                android:id="@+id/helpTextView"
+                android:layout_width="280dp"
+                android:layout_height="884dp"
+                android:autoLink="web"
+                android:text="@string/help_contents"
+                android:visibility="visible" />
+        </ScrollView>
+		
+    </LinearLayout>
+    
+
+
