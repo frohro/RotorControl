@@ -7,14 +7,14 @@ import android.widget.TextView;
 
 public class Help extends Activity {
 	ScrollView helpScrollView;
-	
+	TextView helpTextView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.help);
 		helpScrollView = (ScrollView)findViewById(R.id.helpScrollView);
-		
+		helpTextView = (TextView)findViewById(R.id.helpTextView);
 	}
 
 }

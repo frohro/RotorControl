@@ -5,13 +5,14 @@
     android:fitsSystemWindows="false"
     tools:context=".RotorControl" >
 
-    <ImageView
-        android:id="@+id/imageView1"
+   <ImageView
+        android:id="@+id/mapImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:contentDescription="map View"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/map_View"
         android:scaleType="fitEnd"
         android:src="@drawable/aeqd" />
 
@@ -34,25 +35,6 @@
     </Button>
 
     <TextView
-        android:id="@+id/inputHeadingTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/connectButton"
-        android:layout_alignBottom="@+id/connectButton"
-        android:layout_alignLeft="@+id/editBearingText"
-        android:text="@string/heading" />
-
-    <EditText
-        android:id="@+id/editBearingText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textStatus"
-        android:layout_marginLeft="30dp"
-        android:layout_toRightOf="@+id/connectButton"
-        android:ems="4"
-        android:inputType="text|number" />
-
-    <TextView
         android:id="@+id/textStatus"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -62,13 +44,45 @@
         android:text="@string/heading"
         android:textSize="24sp" />
 
+    <TextView
+        android:id="@+id/degreesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/getHeadingButton"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/editBearingText"
+        android:ems="2"
+        android:text="@string/degrees"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/editBearingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/degreesTextView"
+        android:layout_alignLeft="@+id/rotateProgressBar"
+        android:layout_alignRight="@+id/textStatus"
+        android:ems="2"
+        android:inputType="text|number" />
+
+    <TextView
+        android:id="@+id/inputHeadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editBearingText"
+        android:layout_alignTop="@+id/getHeadingButton"
+        android:layout_marginLeft="19dp"
+        android:text="@string/heading" />
+
     <ProgressBar
         android:id="@+id/rotateProgressBar"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView1"
+        android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/textStatus"
-        android:layout_marginBottom="101dp" />
+        android:layout_marginBottom="94dp" />
 
 </RelativeLayout>
+
+

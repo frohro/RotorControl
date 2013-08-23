@@ -31,6 +31,7 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -38,13 +39,14 @@ import android.widget.TextView.OnEditorActionListener;
 
 public class RotorControl extends Activity {
     Button connectButton, sendButton, rotateAntennaButton;
-    TextView textStatus, inputHeadingTextView;
+    TextView textStatus, inputHeadingTextView, degreesTextView;
     NetworkTask networktask;
     protected String rotateString;
     EditText editBearingText;
     ProgressBar rotateProgressBar;
     CountDownTimer countDownTimer;
     AppPreferences ourPreferences;
+    ImageView mapImageView;
     
 
     @Override
@@ -52,7 +54,9 @@ public class RotorControl extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         connectButton = (Button)findViewById(R.id.connectButton);
+        connectButton.setOnClickListener(connectButtonListener);
         sendButton = (Button)findViewById(R.id.getHeadingButton);
+        sendButton.setOnClickListener(sendButtonListener);
         sendButton.setVisibility(View.INVISIBLE);
         rotateProgressBar = (ProgressBar)findViewById(R.id.rotateProgressBar);
         rotateProgressBar.setVisibility(View.INVISIBLE);
@@ -62,13 +66,28 @@ public class RotorControl extends Activity {
         inputHeadingTextView.setVisibility(View.INVISIBLE);
         editBearingText = (EditText)findViewById(R.id.editBearingText);
         editBearingText.setVisibility(View.INVISIBLE);
-        connectButton.setOnClickListener(connectButtonListener);
-        sendButton.setOnClickListener(sendButtonListener);
-       // editBearingText.addTextChangedListener(editBearingTextListener);
-       
+        editBearingText = (EditText)findViewById(R.id.editBearingText);
+        degreesTextView = (TextView)findViewById(R.id.degreesTextView);
+        degreesTextView.setVisibility(View.INVISIBLE);
+        
         networktask = new NetworkTask(); //Create initial instance so SendDataToNetwork doesn't throw an error.
-    
-        editBearingText= (EditText)findViewById(R.id.editBearingText);
+        /*
+        try {  //This is an attempt to get out of pressing the connect button at startup.
+        	Log.i("MainTask", "Setting up the network connection.\n");
+        	connectButton.setVisibility(View.INVISIBLE);
+        	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                networktask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
+            else
+            	//The above three lines were to solve a bug I
+                // encountered and used the answer here:  
+                // http://stackoverflow.com/questions/9119627/android-sdk-asynctask-doinbackground-not-running-subclass
+               networktask.execute((Void[])null);
+        	} 
+        catch (Exception e) {
+            e.printStackTrace();
+            Log.i("MainTask", "Exception setting up the connection.  Perhaps you don't have everything set up yet.\n");
+        		connectButton.setVisibility(View.VISIBLE);
+        	}*/
         editBearingText.setOnEditorActionListener(new OnEditorActionListener()
         { //This whole business is to perform our rotation when the user hits the DONE key.
             @Override
@@ -126,6 +145,7 @@ public class RotorControl extends Activity {
             editBearingText.setVisibility(View.VISIBLE);
             textStatus.setVisibility(View.VISIBLE);
             inputHeadingTextView.setVisibility(View.VISIBLE);
+            degreesTextView.setVisibility(View.VISIBLE);
             networktask = new NetworkTask(); //New instance of NetworkTask
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
                 networktask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
@@ -249,7 +269,22 @@ public class RotorControl extends Activity {
         protected void onProgressUpdate(byte[]... values) {
             if (values.length > 0) {
                 Log.i("AsyncTask", "onProgressUpdate: " + values[0].length + " bytes received.");
-                textStatus.setText(new String(values[0]));
+                String returnedString = new String(values[0]);
+                String[] splitString;// = new String;
+                splitString = returnedString.split("\\.");
+                // The following if statement is to fix a bug where I was getting the long format for the heading 
+                // for some reason.  It seems to happen after setting the heading, but this is a work
+                // around.
+                if (splitString[0].toCharArray()[0] == new String("g").toCharArray()[0]) 
+                	{
+                	textStatus.setText("Getting Heading:  ");
+                	SendDataToNetwork("p/n");
+                	}
+                else 
+                {
+                	//String formattedBearing = new String(splitString[0].split(".")[0]);
+                	textStatus.setText(splitString[0] + " degrees");
+                }
                 rotateProgressBar.setVisibility(View.INVISIBLE);
             }
         }
