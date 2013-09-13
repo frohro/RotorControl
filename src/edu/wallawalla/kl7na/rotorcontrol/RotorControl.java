@@ -38,9 +38,9 @@ import android.widget.TextView.OnEditorActionListener;
 
 
 public class RotorControl extends Activity {
-    Button connectButton, sendButton, rotateAntennaButton;
+    Button connectButton, getHeadingButton, rotateAntennaButton;
     TextView textStatus, inputHeadingTextView, degreesTextView;
-    NetworkTask networktask;
+    NetworkTask networkTask;
     protected String rotateString;
     EditText editBearingText;
     ProgressBar rotateProgressBar;
@@ -55,9 +55,9 @@ public class RotorControl extends Activity {
         setContentView(R.layout.activity_main);
         connectButton = (Button)findViewById(R.id.connectButton);
         connectButton.setOnClickListener(connectButtonListener);
-        sendButton = (Button)findViewById(R.id.getHeadingButton);
-        sendButton.setOnClickListener(sendButtonListener);
-        sendButton.setVisibility(View.INVISIBLE);
+        getHeadingButton = (Button)findViewById(R.id.getHeadingButton);
+        getHeadingButton.setOnClickListener(sendButtonListener);
+        getHeadingButton.setVisibility(View.INVISIBLE);
         rotateProgressBar = (ProgressBar)findViewById(R.id.rotateProgressBar);
         rotateProgressBar.setVisibility(View.INVISIBLE);
         textStatus = (TextView)findViewById(R.id.textStatus);
@@ -70,18 +70,18 @@ public class RotorControl extends Activity {
         degreesTextView = (TextView)findViewById(R.id.degreesTextView);
         degreesTextView.setVisibility(View.INVISIBLE);
         
-        networktask = new NetworkTask(); //Create initial instance so SendDataToNetwork doesn't throw an error.
+        networkTask = new NetworkTask(); //Create initial instance so SendDataToNetwork doesn't throw an error.
         /*
         try {  //This is an attempt to get out of pressing the connect button at startup.
         	Log.i("MainTask", "Setting up the network connection.\n");
         	connectButton.setVisibility(View.INVISIBLE);
         	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                networktask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
+                networkTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
             else
             	//The above three lines were to solve a bug I
                 // encountered and used the answer here:  
                 // http://stackoverflow.com/questions/9119627/android-sdk-asynctask-doinbackground-not-running-subclass
-               networktask.execute((Void[])null);
+               networkTask.execute((Void[])null);
         	} 
         catch (Exception e) {
             e.printStackTrace();
@@ -141,36 +141,37 @@ public class RotorControl extends Activity {
         @SuppressLint("NewApi")
 		public void onClick(View v){
             connectButton.setVisibility(View.INVISIBLE);
-            sendButton.setVisibility(View.VISIBLE);
+            getHeadingButton.setVisibility(View.VISIBLE);
             editBearingText.setVisibility(View.VISIBLE);
             textStatus.setVisibility(View.VISIBLE);
             inputHeadingTextView.setVisibility(View.VISIBLE);
             degreesTextView.setVisibility(View.VISIBLE);
-            networktask = new NetworkTask(); //New instance of NetworkTask
+            networkTask = new NetworkTask(); //New instance of NetworkTask
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                networktask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
+                networkTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
             else
             	//The above three lines were to solve a bug I
                 // encountered and used the answer here:  
                 // http://stackoverflow.com/questions/9119627/android-sdk-asynctask-doinbackground-not-running-subclass
-                networktask.execute((Void[])null);
+                networkTask.execute((Void[])null);
         }
     };
     private OnClickListener sendButtonListener = new OnClickListener() {
         public void onClick(View v){
-            textStatus.setText("Getting Heading:  ");
-            networktask.SendDataToNetwork("p\n");
+            textStatus.setText("Working on your request...  ");
+            networkTask.SendDataToNetwork("p\n");
         }
     };
     
     public void goRotate(){
     	rotateProgressBar.setVisibility(View.VISIBLE);
+    	getHeadingButton.setVisibility(View.INVISIBLE);
     	int bearing = Integer.valueOf(rotateString);
     	while (bearing > 180) bearing -= 360;
     	while (bearing < -180) bearing += 360;
     	String cmdString = new String("P" + String.format("%3d",bearing) +" 0\n");
     	Log.v("Log_tag","Sent the string " + cmdString);
-    	networktask.SendDataToNetwork(cmdString);
+    	networkTask.SendDataToNetwork(cmdString);
 		final long length_in_milliseconds=100000, period_in_milliseconds=1000;
 		countDownTimer = new CountDownTimer(length_in_milliseconds, period_in_milliseconds) {
 	        
@@ -184,10 +185,11 @@ public class RotorControl extends Activity {
 	        @Override
 	        public void onFinish() {
 	            rotateProgressBar.setVisibility(View.INVISIBLE);
+	            getHeadingButton.setVisibility(View.VISIBLE);
 	        }
 	    }.start();
-	    textStatus.setText("Getting Heading:  ");
-        networktask.SendDataToNetwork("p/n");
+	    textStatus.setText("Working on your request...  ");
+        networkTask.SendDataToNetwork("p\n");
     }
 
     public class NetworkTask extends AsyncTask<Void, byte[], Boolean> {
@@ -276,16 +278,20 @@ public class RotorControl extends Activity {
                 // for some reason.  It seems to happen after setting the heading, but this is a work
                 // around.
                 if (splitString[0].toCharArray()[0] == new String("g").toCharArray()[0]) 
-                	{
-                	textStatus.setText("Getting Heading:  ");
-                	SendDataToNetwork("p/n");
-                	}
+                {
+                	textStatus.setText("Working on your request...  ");
+                	Log.i("AsyncTask", "Got that get string again!=\n");
+                	textStatus.setVisibility(View.INVISIBLE);
+                	SendDataToNetwork("p\n");
+                }
                 else 
                 {
                 	//String formattedBearing = new String(splitString[0].split(".")[0]);
                 	textStatus.setText(splitString[0] + " degrees");
+                	textStatus.setVisibility(View.VISIBLE);
                 }
                 rotateProgressBar.setVisibility(View.INVISIBLE);
+                getHeadingButton.setVisibility(View.VISIBLE);
             }
         }
         @Override
@@ -308,6 +314,6 @@ public class RotorControl extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        networktask.cancel(true); //In case the task is currently running
+        networkTask.cancel(true); //In case the task is currently running
     } 
 }
