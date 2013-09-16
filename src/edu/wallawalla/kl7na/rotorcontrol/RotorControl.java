@@ -34,11 +34,7 @@ import android.widget.TextView.OnEditorActionListener;
 
 
 public class RotorControl extends Activity {
-<<<<<<< HEAD
     Button connectButton, getHeadingButton;
-=======
-    Button connectButton, getHeadingButton, rotateAntennaButton;
->>>>>>> 0409de4c2aa99e0a05b6d00e28321dd628e49d5d
     TextView textStatus, inputHeadingTextView, degreesTextView;
     NetworkTask networkTask;
     protected String rotateString;
@@ -69,28 +65,8 @@ public class RotorControl extends Activity {
         degreesTextView = (TextView)findViewById(R.id.degreesTextView);
         degreesTextView.setVisibility(View.INVISIBLE);
         
-<<<<<<< HEAD
         connectToRotor(); //This is an attempt to get out of pressing the connect button at startup.
-=======
-        networkTask = new NetworkTask(); //Create initial instance so SendDataToNetwork doesn't throw an error.
-        /*
-        try {  //This is an attempt to get out of pressing the connect button at startup.
-        	Log.i("MainTask", "Setting up the network connection.\n");
-        	connectButton.setVisibility(View.INVISIBLE);
-        	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                networkTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
-            else
-            	//The above three lines were to solve a bug I
-                // encountered and used the answer here:  
-                // http://stackoverflow.com/questions/9119627/android-sdk-asynctask-doinbackground-not-running-subclass
-               networkTask.execute((Void[])null);
-        	} 
-        catch (Exception e) {
-            e.printStackTrace();
-            Log.i("MainTask", "Exception setting up the connection.  Perhaps you don't have everything set up yet.\n");
-        		connectButton.setVisibility(View.VISIBLE);
-        	}*/
->>>>>>> 0409de4c2aa99e0a05b6d00e28321dd628e49d5d
+
         editBearingText.setOnEditorActionListener(new OnEditorActionListener()
         { //This whole business is to perform our rotation when the user hits the DONE key.
             @Override
@@ -169,24 +145,7 @@ public class RotorControl extends Activity {
 	private OnClickListener connectButtonListener = new OnClickListener() {
         @SuppressLint("NewApi")
 		public void onClick(View v){
-<<<<<<< HEAD
         	connectToRotor();
-=======
-            connectButton.setVisibility(View.INVISIBLE);
-            getHeadingButton.setVisibility(View.VISIBLE);
-            editBearingText.setVisibility(View.VISIBLE);
-            textStatus.setVisibility(View.VISIBLE);
-            inputHeadingTextView.setVisibility(View.VISIBLE);
-            degreesTextView.setVisibility(View.VISIBLE);
-            networkTask = new NetworkTask(); //New instance of NetworkTask
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                networkTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
-            else
-            	//The above three lines were to solve a bug I
-                // encountered and used the answer here:  
-                // http://stackoverflow.com/questions/9119627/android-sdk-asynctask-doinbackground-not-running-subclass
-                networkTask.execute((Void[])null);
->>>>>>> 0409de4c2aa99e0a05b6d00e28321dd628e49d5d
         }
     };
     private OnClickListener sendButtonListener = new OnClickListener() {
