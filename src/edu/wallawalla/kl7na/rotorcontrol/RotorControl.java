@@ -101,6 +101,7 @@ public class RotorControl extends Activity {
                 // encountered and used the answer here:  
                 // http://stackoverflow.com/questions/9119627/android-sdk-asynctask-doinbackground-not-running-subclass
                networkTask.execute((Void[])null);
+        	//getHeading();  Would be nice, but you need to give the network time to get set up.
         	} 
         catch (Exception e) {
             e.printStackTrace();
@@ -150,10 +151,14 @@ public class RotorControl extends Activity {
     };
     private OnClickListener sendButtonListener = new OnClickListener() {
         public void onClick(View v){
-            textStatus.setText("Working on your request...  ");
-            networkTask.SendDataToNetwork("p\n");
+            getHeading();
         }
     };
+    
+    private void getHeading() {
+		textStatus.setText("Working on your request...  ");
+        networkTask.SendDataToNetwork("p\n");
+	}
     
     public void goRotate(){
     	rotateProgressBar.setVisibility(View.VISIBLE);
@@ -180,8 +185,7 @@ public class RotorControl extends Activity {
 	            getHeadingButton.setVisibility(View.VISIBLE);
 	        }
 	    }.start();
-	    textStatus.setText("Working on your request...  ");
-        networkTask.SendDataToNetwork("p\n");
+	    getHeading();
     }
 
     public class NetworkTask extends AsyncTask<Void, byte[], Boolean> {
@@ -271,10 +275,9 @@ public class RotorControl extends Activity {
                 // around.
                 if (splitString[0].toCharArray()[0] == new String("g").toCharArray()[0]) 
                 {
-                	textStatus.setText("Working on your request...  ");
                 	Log.i("AsyncTask", "Got that get string again!=\n");
                 	textStatus.setVisibility(View.INVISIBLE);
-                	SendDataToNetwork("p\n");
+                	getHeading();
                 }
                 else 
                 {
