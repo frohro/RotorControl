@@ -8,8 +8,8 @@
     <string name="heading">Set Heading: </string>
     <string name="rotate">Rotate Antenna</string>
     <string name="help">Help</string>
-    <string name="ip_address">IP Address</string>
-    <string name="provide_ip_address">Please provide the IP address of the machine which has rotctld running.</string>
+    <string name="ip_address">Host Name or IP Address</string>
+    <string name="provide_ip_address">Please provide the host name or IP address of the machine which has rotctld running.</string>
     <string name="port">Port Number</string>
     <string name="provide_port_number">Please provide the port number of the rotctld process.</string>
     <string name="help_contents">This GUI application works with the 

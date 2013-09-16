@@ -1,8 +1,6 @@
 package edu.wallawalla.kl7na.rotorcontrol;
 
-//import android.os.Bundle;
-//import android.app.Activity;
-//import android.view.Menu;
+
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,29 +22,26 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 
 public class RotorControl extends Activity {
-    Button connectButton, sendButton, rotateAntennaButton;
+    Button connectButton, getHeadingButton;
     TextView textStatus, inputHeadingTextView, degreesTextView;
-    NetworkTask networktask;
+    NetworkTask networkTask;
     protected String rotateString;
     EditText editBearingText;
     ProgressBar rotateProgressBar;
     CountDownTimer countDownTimer;
     AppPreferences ourPreferences;
-    ImageView mapImageView;
     
 
     @Override
@@ -55,9 +50,9 @@ public class RotorControl extends Activity {
         setContentView(R.layout.activity_main);
         connectButton = (Button)findViewById(R.id.connectButton);
         connectButton.setOnClickListener(connectButtonListener);
-        sendButton = (Button)findViewById(R.id.getHeadingButton);
-        sendButton.setOnClickListener(sendButtonListener);
-        sendButton.setVisibility(View.INVISIBLE);
+        getHeadingButton = (Button)findViewById(R.id.getHeadingButton);
+        getHeadingButton.setOnClickListener(sendButtonListener);
+        getHeadingButton.setVisibility(View.INVISIBLE);
         rotateProgressBar = (ProgressBar)findViewById(R.id.rotateProgressBar);
         rotateProgressBar.setVisibility(View.INVISIBLE);
         textStatus = (TextView)findViewById(R.id.textStatus);
@@ -70,24 +65,7 @@ public class RotorControl extends Activity {
         degreesTextView = (TextView)findViewById(R.id.degreesTextView);
         degreesTextView.setVisibility(View.INVISIBLE);
         
-        networktask = new NetworkTask(); //Create initial instance so SendDataToNetwork doesn't throw an error.
-        /*
-        try {  //This is an attempt to get out of pressing the connect button at startup.
-        	Log.i("MainTask", "Setting up the network connection.\n");
-        	connectButton.setVisibility(View.INVISIBLE);
-        	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                networktask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
-            else
-            	//The above three lines were to solve a bug I
-                // encountered and used the answer here:  
-                // http://stackoverflow.com/questions/9119627/android-sdk-asynctask-doinbackground-not-running-subclass
-               networktask.execute((Void[])null);
-        	} 
-        catch (Exception e) {
-            e.printStackTrace();
-            Log.i("MainTask", "Exception setting up the connection.  Perhaps you don't have everything set up yet.\n");
-        		connectButton.setVisibility(View.VISIBLE);
-        	}*/
+        connectToRotor(); //This is an attempt to get out of pressing the connect button at startup.
         editBearingText.setOnEditorActionListener(new OnEditorActionListener()
         { //This whole business is to perform our rotation when the user hits the DONE key.
             @Override
@@ -102,13 +80,39 @@ public class RotorControl extends Activity {
             }
         });
     }
+
+	private void connectToRotor() {
+		try {  
+			networkTask = new NetworkTask(); 
+        	Log.i("MainTask", "Setting up the network connection.\n");
+        	connectButton.setVisibility(View.INVISIBLE);
+        	connectButton.setVisibility(View.INVISIBLE);
+            getHeadingButton.setVisibility(View.VISIBLE);
+            editBearingText.setVisibility(View.VISIBLE);
+            textStatus.setVisibility(View.VISIBLE);
+            textStatus.setText("");
+            inputHeadingTextView.setVisibility(View.VISIBLE);
+            degreesTextView.setVisibility(View.VISIBLE);
+        	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                networkTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
+            else
+            	//The above three lines were to solve a bug I
+                // encountered and used the answer here:  
+                // http://stackoverflow.com/questions/9119627/android-sdk-asynctask-doinbackground-not-running-subclass
+               networkTask.execute((Void[])null);
+        	} 
+        catch (Exception e) {
+            e.printStackTrace();
+            Log.i("MainTask", "Exception setting up the connection.  Perhaps you don't have networkTask.executeOnExecutorything set up yet.\n");
+        		connectButton.setVisibility(View.VISIBLE);
+        	}
+	}
     
     @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		super.onCreateOptionsMenu(menu);
-		MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.menu_activity_main, menu);
+	    getMenuInflater().inflate(R.menu.menu_activity_main, menu);
 	    return true;
 	}
 
@@ -140,37 +144,25 @@ public class RotorControl extends Activity {
 	private OnClickListener connectButtonListener = new OnClickListener() {
         @SuppressLint("NewApi")
 		public void onClick(View v){
-            connectButton.setVisibility(View.INVISIBLE);
-            sendButton.setVisibility(View.VISIBLE);
-            editBearingText.setVisibility(View.VISIBLE);
-            textStatus.setVisibility(View.VISIBLE);
-            inputHeadingTextView.setVisibility(View.VISIBLE);
-            degreesTextView.setVisibility(View.VISIBLE);
-            networktask = new NetworkTask(); //New instance of NetworkTask
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                networktask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
-            else
-            	//The above three lines were to solve a bug I
-                // encountered and used the answer here:  
-                // http://stackoverflow.com/questions/9119627/android-sdk-asynctask-doinbackground-not-running-subclass
-                networktask.execute((Void[])null);
+        	connectToRotor();
         }
     };
     private OnClickListener sendButtonListener = new OnClickListener() {
         public void onClick(View v){
-            textStatus.setText("Getting Heading:  ");
-            networktask.SendDataToNetwork("p\n");
+            textStatus.setText("Working on your request...  ");
+            networkTask.SendDataToNetwork("p\n");
         }
     };
     
     public void goRotate(){
     	rotateProgressBar.setVisibility(View.VISIBLE);
+    	getHeadingButton.setVisibility(View.INVISIBLE);
     	int bearing = Integer.valueOf(rotateString);
     	while (bearing > 180) bearing -= 360;
     	while (bearing < -180) bearing += 360;
     	String cmdString = new String("P" + String.format("%3d",bearing) +" 0\n");
     	Log.v("Log_tag","Sent the string " + cmdString);
-    	networktask.SendDataToNetwork(cmdString);
+    	networkTask.SendDataToNetwork(cmdString);
 		final long length_in_milliseconds=100000, period_in_milliseconds=1000;
 		countDownTimer = new CountDownTimer(length_in_milliseconds, period_in_milliseconds) {
 	        
@@ -184,10 +176,11 @@ public class RotorControl extends Activity {
 	        @Override
 	        public void onFinish() {
 	            rotateProgressBar.setVisibility(View.INVISIBLE);
+	            getHeadingButton.setVisibility(View.VISIBLE);
 	        }
 	    }.start();
-	    textStatus.setText("Getting Heading:  ");
-        networktask.SendDataToNetwork("p/n");
+	    textStatus.setText("Working on your request...  ");
+        networkTask.SendDataToNetwork("p\n");
     }
 
     public class NetworkTask extends AsyncTask<Void, byte[], Boolean> {
@@ -216,14 +209,14 @@ public class RotorControl extends Activity {
                     nos = nsocket.getOutputStream();
                     Log.i("AsyncTask", "doInBackground: Socket created, streams assigned");
                     Log.i("AsyncTask", "doInBackground: Waiting for inital data...");
-                    byte[] buffer = new byte[4096];
-                    int read = nis.read(buffer, 0, 4096); //This is blocking
+                    byte[] buffer = new byte[256];
+                    int read = nis.read(buffer, 0, 256); //This is blocking
                     while(read != -1){
                         byte[] tempdata = new byte[read];
                         System.arraycopy(buffer, 0, tempdata, 0, read);
                         publishProgress(tempdata);
                         Log.i("AsyncTask", "doInBackground: Got some data");
-                        read = nis.read(buffer, 0, 4096); //This is blocking.
+                        read = nis.read(buffer, 0, 256); //This is blocking.
                     }
                 }
                 else Log.i("AsyncTask", "doInBackground: nsocket not connected");
@@ -276,16 +269,20 @@ public class RotorControl extends Activity {
                 // for some reason.  It seems to happen after setting the heading, but this is a work
                 // around.
                 if (splitString[0].toCharArray()[0] == new String("g").toCharArray()[0]) 
-                	{
-                	textStatus.setText("Getting Heading:  ");
-                	SendDataToNetwork("p/n");
-                	}
+                {
+                	textStatus.setText("Working on your request...  ");
+                	Log.i("AsyncTask", "Got that get string again!=\n");
+                	textStatus.setVisibility(View.INVISIBLE);
+                	SendDataToNetwork("p\n");
+                }
                 else 
                 {
                 	//String formattedBearing = new String(splitString[0].split(".")[0]);
                 	textStatus.setText(splitString[0] + " degrees");
+                	textStatus.setVisibility(View.VISIBLE);
                 }
                 rotateProgressBar.setVisibility(View.INVISIBLE);
+                getHeadingButton.setVisibility(View.VISIBLE);
             }
         }
         @Override
@@ -299,7 +296,8 @@ public class RotorControl extends Activity {
                 Log.i("AsyncTask", "onPostExecute: Completed with an Error.");
                 textStatus.setText("There was a connection error.");
             } else {
-                Log.i("AsyncTask", "onPostExecute: Completed.");
+                Log.i("AsyncTask", "onPostExecute: Completed without error.");
+                textStatus.setText("Connnected!");
             }
             connectButton.setVisibility(View.VISIBLE);
         }
@@ -308,6 +306,6 @@ public class RotorControl extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        networktask.cancel(true); //In case the task is currently running
+        networkTask.cancel(true); //In case the task is currently running
     } 
 }
