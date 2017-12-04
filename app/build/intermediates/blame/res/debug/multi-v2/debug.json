@@ -1,0 +1,95 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/frohro/AndroidStudioProjects/RotorControl/app/build/intermediates/res/merged/debug/values-v11_values-v11.arsc.flat",
+            "map": [
+                {
+                    "source": "/home/frohro/AndroidStudioProjects/RotorControl/app/src/main/res/values-v11/styles.xml",
+                    "from": {
+                        "startLines": "6",
+                        "startColumns": "4",
+                        "startOffsets": "177",
+                        "endLines": "8",
+                        "endColumns": "12",
+                        "endOffsets": "309"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "4",
+                        "endColumns": "12",
+                        "endOffsets": "187"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/home/frohro/AndroidStudioProjects/RotorControl/app/build/intermediates/res/merged/debug/values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "/home/frohro/AndroidStudioProjects/RotorControl/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "6,15",
+                        "startColumns": "4,4",
+                        "startOffsets": "186,510",
+                        "endLines": "12,17",
+                        "endColumns": "12,12",
+                        "endOffsets": "472,665"
+                    },
+                    "to": {
+                        "startLines": "41,48",
+                        "startColumns": "4,4",
+                        "startOffsets": "2836,3127",
+                        "endLines": "47,50",
+                        "endColumns": "12,12",
+                        "endOffsets": "3122,3282"
+                    }
+                },
+                {
+                    "source": "/home/frohro/AndroidStudioProjects/RotorControl/app/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "3,5,40,6,7,9,14,39,10,41,4,12,11,13,8",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "56,157,2739,224,276,376,784,2684,414,2783,106,609,477,654,326",
+                        "endLines": "3,5,40,6,7,9,38,39,10,41,4,12,11,13,8",
+                        "endColumns": "49,66,43,51,49,37,67,54,62,53,50,44,131,129,49",
+                        "endOffsets": "101,219,2778,271,321,409,2679,2734,472,2832,152,649,604,779,371"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,33,34,35,36,37,38,39,40",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,105,172,216,268,318,356,2256,2311,2374,2428,2479,2524,2656,2786",
+                        "endLines": "2,3,4,5,6,7,32,33,34,35,36,37,38,39,40",
+                        "endColumns": "49,66,43,51,49,37,67,54,62,53,50,44,131,129,49",
+                        "endOffsets": "100,167,211,263,313,351,2251,2306,2369,2423,2474,2519,2651,2781,2831"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/home/frohro/AndroidStudioProjects/RotorControl/app/build/intermediates/res/merged/debug/values-v14_values-v14.arsc.flat",
+            "map": [
+                {
+                    "source": "/home/frohro/AndroidStudioProjects/RotorControl/app/src/main/res/values-v14/styles.xml",
+                    "from": {
+                        "startLines": "7",
+                        "startColumns": "4",
+                        "startOffsets": "220",
+                        "endLines": "9",
+                        "endColumns": "12",
+                        "endOffsets": "366"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "4",
+                        "endColumns": "12",
+                        "endOffsets": "201"
+                    }
+                }
+            ]
+        }
+    ]
+}

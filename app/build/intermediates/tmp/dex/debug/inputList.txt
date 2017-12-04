@@ -1,0 +1,2 @@
+/home/frohro/AndroidStudioProjects/RotorControl/app/build/intermediates/classes/debug
+/home/frohro/AndroidStudioProjects/RotorControl/app/build/intermediates/pre-dexed/debug/support-v4-18.0.0-c5afb0de391625f1c26b527ef2bb6adee60477c5.jar

@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/frohro/AndroidStudioProjects/RotorControl/app/build/intermediates/res/merged/debug/layout/activity_main.xml",
+        "source": "/home/frohro/AndroidStudioProjects/RotorControl/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/frohro/AndroidStudioProjects/RotorControl/app/build/intermediates/res/merged/debug/layout/help.xml",
+        "source": "/home/frohro/AndroidStudioProjects/RotorControl/app/src/main/res/layout/help.xml"
+    }
+]

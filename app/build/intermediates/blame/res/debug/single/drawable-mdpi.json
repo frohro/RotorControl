@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/home/frohro/AndroidStudioProjects/RotorControl/app/build/intermediates/res/merged/debug/drawable-mdpi/aeqd.png",
+        "source": "/home/frohro/AndroidStudioProjects/RotorControl/app/src/main/res/drawable-mdpi/aeqd.png"
+    },
+    {
+        "merged": "/home/frohro/AndroidStudioProjects/RotorControl/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_launcher.png",
+        "source": "/home/frohro/AndroidStudioProjects/RotorControl/app/src/main/res/drawable-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/frohro/AndroidStudioProjects/RotorControl/app/build/intermediates/res/merged/debug/drawable-mdpi/icon.png",
+        "source": "/home/frohro/AndroidStudioProjects/RotorControl/app/src/main/res/drawable-mdpi/icon.png"
+    }
+]
