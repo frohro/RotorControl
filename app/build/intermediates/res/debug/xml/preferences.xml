@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <EditTextPreference android:key="ip_address"
+        android:title="@string/ip_address" android:summary="@string/provide_ip_address"/>
+    <EditTextPreference android:key="port"
+        android:inputType="number" 
+        android:title="@string/port" android:summary="@string/provide_port_number"/>
+</PreferenceScreen>
+<!-- From: file:/home/frohro/AndroidStudioProjects/RotorControl/app/src/main/res/xml/preferences.xml -->

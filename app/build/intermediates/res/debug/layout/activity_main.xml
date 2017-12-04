@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="false"
+    tools:context=".RotorControl" >
+
+   <ImageView
+        android:id="@+id/mapImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/map_View"
+        android:scaleType="fitEnd"
+        android:src="@drawable/aeqd" />
+
+    <Button
+        android:id="@+id/connectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/connect_string" >
+    </Button>
+
+    <Button
+        android:id="@+id/getHeadingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/connectButton"
+        android:text="@string/get_heading" >
+    </Button>
+
+    <TextView
+        android:id="@+id/textStatus"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/connectButton"
+        android:layout_below="@+id/getHeadingButton"
+        android:text="@string/heading"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/degreesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/getHeadingButton"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/editBearingText"
+        android:ems="2"
+        android:text="@string/degrees"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/editBearingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/degreesTextView"
+        android:layout_alignLeft="@+id/rotateProgressBar"
+        android:layout_alignRight="@+id/textStatus"
+        android:ems="2"
+        android:inputType="text|number" />
+
+    <TextView
+        android:id="@+id/inputHeadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editBearingText"
+        android:layout_alignTop="@+id/getHeadingButton"
+        android:layout_marginLeft="19dp"
+        android:text="@string/heading" />
+
+    <ProgressBar
+        android:id="@+id/rotateProgressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/textStatus"
+        android:layout_marginBottom="94dp" />
+
+</RelativeLayout>
+
+
+<!-- From: file:/home/frohro/AndroidStudioProjects/RotorControl/app/src/main/res/layout/activity_main.xml -->

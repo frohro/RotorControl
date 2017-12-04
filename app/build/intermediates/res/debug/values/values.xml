@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/home/frohro/AndroidStudioProjects/RotorControl/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="app_name">RotorControl</string>
+    <string name="connect_string">Connect to Remote Rotor</string>
+    <string name="degrees">degrees</string>
+    <string name="get_heading">Get Heading</string>
+    <string name="heading">Set Heading: </string>
+    <string name="help">Help</string>
+    <string name="help_contents">This GUI application works with the 
+           open source hamlib project.  ( http://hamlib.sourceforge.net )\n
+           You need a rotor that can be controlled via serial port and 
+           a computer that is connected to that rotor controller via 
+           the serial port.  This computer must also be connected to 
+           the local area network and running the hamlib rotctld 
+           rotor control daemon.  The rotor must support the 
+           get_position and set_position commands.  This app 
+           connects via the network to that daemon (usually on port 4533), and 
+           sends and gets the heading.  At present, it works 
+           for azimuth only.  \nFor setup information on the server, see the man page.  It is available at 
+           ( http://manpages.ubuntu.com/manpages/lucid/man8/rotctld.8.html ).
+            \n  Once you have the rotctld running on the
+            server you start this app on your phone and hit the "Connect to Server" 
+            button.  It will disappear, and you will have the option
+            of getting the present heading of the rotor (in degrees) with the "Get Heading"
+            button or setting a new heading with the "Heading" text entry
+            field.  The rotor will rotate to the new heading (which is apporoximately
+            what you asked for in the text field by typing in a bearing in degrees). 
+            A CDE or HyGain rotor generally turns at about one revolution per
+            minute, but to get closer to your specified heading, the rotor will
+            seek with some controllers (like the Heathkit Intellirotor) for a while longer.
+            You will know it is finished when you get a new heading on the
+            screen.  If you wish you can quit this app soon after setting the new
+            heading, and the rotation will still complete.</string>
+    <string name="help_heading_contents">Help</string>
+    <string name="ip_address">Host Name or IP Address</string>
+    <string name="map_View">Great Circle Map</string>
+    <string name="menu_settings">Settings</string>
+    <string name="port">Port Number</string>
+    <string name="provide_ip_address">Please provide the host name or IP address of the machine which has rotctld running.</string>
+    <string name="provide_port_number">Please provide the port number of the rotctld process.  The default is port 4533.</string>
+    <string name="rotate">Rotate Antenna</string>
+    <!-- From: file:/home/frohro/AndroidStudioProjects/RotorControl/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+</resources>

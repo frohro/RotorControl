@@ -1,0 +1,4 @@
+#Sun Dec 03 19:25:02 PST 2017
+base.0=/home/frohro/AndroidStudioProjects/RotorControl/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex

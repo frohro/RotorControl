@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Sun Dec 03 18:29:24 PST 2017
+0.baseType=DIRECTORY
+0.base=/home/frohro/AndroidStudioProjects/RotorControl/app/build/intermediates/transforms/dexMerger/debug/0
+0.path=classes.dex
+0.set=DEX
+count=1
